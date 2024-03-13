@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Viết chương trình nhập vào 5 số nguyên, in ra số nguyên lớn nhất và sắp xếp chuỗi số 
+    theo thứ tự giảm dần-->
+    <script>
+        // Hàm để sắp xếp mảng giảm dần
+        function sapXepGiamDan(arr) {
+           return arr.sort((a, b) => b - a);
+        }
+
+        // Nhập vào 5 số nguyên
+        var soNguyen = [];
+        for (var i = 0; i < 5; i++) {
+           var so = parseInt(prompt("Nhập số nguyên thứ " + (i + 1) + ": "));
+           soNguyen.push(so);
+        }
+
+        // Tìm số lớn nhất
+        var soLonNhat = Math.max(...soNguyen);
+
+        // Sắp xếp mảng giảm dần
+        var sapXep = sapXepGiamDan(soNguyen.slice());
+
+        // In ra số lớn nhất và chuỗi số đã sắp xếp
+        console.log("Số lớn nhất là: " + soLonNhat);
+        console.log("Chuỗi số sau khi sắp xếp giảm dần: " + sapXep.join(', '));
+    </script>
+</body>
+</html>

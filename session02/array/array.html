@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="product">
+    <button onclick="addToCart()">mua</button>
+    <!--
+        INPUT: [5,3,6,1,4]
+        OUTPUT: [1,3,4,5,6]
+        Array: Mảng thuộc kiểu dữ liệu phức tạp (tham chiếu - reference) 
+        I. Cách khai báo
+        Q/A: có bao nhiêu cách khai báo (khởi tạo 1 mảng)
+        1.let arr= [];
+        2.let student= new Array();
+        Các phần tử trong mảng ngăn cách với nhau bằng dấu phẩy
+        mảng có thể chứa nhiều kiểu dữ liệu khác nhau
+        mảng đánh chỉ mục index từ 0
+        kiểm tra độ dài của mảng: tên mảng .length
+        Các cách duyệt mảng
+        1.dùng for
+        2.for-in: trả về chỉ mục
+        3.for-of: trả về giá trị
+        ********
+        CRUD với mảng
+        1.C:Create
+        +unshift: thêm vào đầu
+        +push: thêm vào cuối
+        +splice thêm vào vị trí bất kì
+        2.R:Read
+        -dùng for,for-in,for-of
+        3.U:Update
+        -dùng splice
+        -update theo vị trí
+        4.D:Delete
+        -pop(): xóa phần tử cuối cùng trong mảng
+        -shift(): xóa phần tử đầu
+        -dùng splice
+        Các phương thức làm việc với array
+        1.pop(): xóa phần tử cuối cùng
+        2.push(): thêm vào cuối
+        3.shift(): xóa phần tử đầu
+        4.unshift(): thêm vào đầu
+        5.join(): mảng -> chuỗi
+        6.split(): chuỗi -> mảng
+        7.concat(): gộp mảng
+        8.splice(): Thêm, sửa, xóa
+        9.slice(): cắt, sao chép -> mảng mới
+        10.map(): phương thức map() gọi hàm callback trên mọi phần tử tạo ra 1 mảng chứa kết quả
+        11.filter(): hàm filter gọi 1 hàm callback trên mọi phần tử và tạo ra 1 mảng chứa tất cả các phần tử thỏa mãn điều kiện
+        12.for each(): là phương thức của mảng được sử dụng để duyệt qua từng phần tử của mảng
+        13.reduce(): được sử dụng để thực hiện một hàm thực thi lên từng phần tử của mảng để tính toán hoặc kết hợp chúng thành một giá trị duy nhất
+        14.find(): được sử dụng để tìm phần tử đầu tiên trong mảng thỏa mãn điều kiện, sẽ trả về giá trị của phần tử đó,
+        Nếu không có phần tử nào thỏa mãn điều kiện, find() sẽ trả về underfind
+        15.find Index(): trả về vị trí của phần tử thỏa mãn điều kiện nếu không có trả về
+        16.start Witdh(): được sử dụng để kiểm tra xem một chuỗi có bắt đầu bằng một chuỗi khác đã cho hay không.
+        Phương thức này trả về giá trị boolean, true nếu chuỗi bắt đầu bằng chuỗi đã cho và false nếu không.
+        17.end Width(): được sử dụng để kiểm tra xem một chuỗi có kết thúc bằng một chuỗi đã cho hay không.
+        Phương thức này trả về true nếu chuỗi kêt thúc bằng chuỗi đã cho và false nếu không.
+        18.charAt(): sử dụng để trả về kí tự tại một vị trí cụ thể trong một chuỗi
+        19.indexOf(): trong Javascript được sử dụng để tìm chỉ mục (index) đầu tiên của một chuỗi con trong một chuỗi.
+        Nếu chuỗi con không được tìm thấy, phương thức sẽ trả về -1
+        20.include(): được sử dụng để kiểm tra xe xét chuỗi có chứa một chuỗi con cụ thể hay không.
+        Phương thức này trả về giá trị boolean: true nếu chuỗi chứa chuỗi con và false nếu không
+        21.every(): trong Javascript được sử dụng để kiểm tra xem tất cả các phần tử trong một mảng có thỏa mãn một điều kiện nào đó hay không.
+        Phương thức này trả về true nếu tất cả các phần tử thỏa mãn điều kiện, và false nếu ít nhất một phần tử không thỏa mãn điều kiện.
+        22.fill(): trong Javascript được sử dụng để thay thế tất cả các phần tử trong một mảng bằng một giá trị cụ thể.
+        23.copyWithIn(): là phương thức trong Javascript được sử dụng để sao chép một phần của mảng và dán nó vào vị trí khác trong cùng mảng 
+        24.reverse(): đảo ngược lại vị trí của các phần tử trong mảng
+        25.sort(): sắp xếp các phần tử trong mảng theo thứ tự tăng (return a-b), giảm(return b-a)
+    -->
+    <script>
+        // let arr=[5,3,6,1,4];
+        // for(let i = 0; i < arr.length; i++){
+        //     for(let j = 0; j < arr.length; j++){
+        //         if(arr[j] > arr[j+1]) {
+        //             let temp = arr[j];
+        //             arr[j+1] = arr[j];
+        //             arr[j] = temp;
+        //         }
+        //     }
+        // }
+        // console.log("arr sắp xếp từ bé đến lớn!", arr);
+        // let students=["hoa", "hồng", "minh", "hùng"];
+        // students.splice(3,0,"huệ");
+        // students.splice(1,1,"hạnh");
+        // students[1]="hạnh";
+        // students.splice(1,1);
+        // console.log(students);
+        // for(let i = 0; i < students.length; i++) {
+        //     console.log(students[i]);
+        // }
+        // for (const key111 in students) {
+        //     console.log(students[key111]);
+        // }
+        // console.log("*********************");
+        // for (const value of object) {
+        //     console.log("value", value);
+        // }
+        let products=[
+            {
+                id: 1,
+                name: "iphone5",
+                quantity: 5,
+                price: 5000
+            },
+            {
+                id:2,
+                name: "iphone6",
+                stock: 7,
+                price: 6000
+            },
+            {
+                id:3,
+                name: "iphone5",
+                stock: 8,
+                price: 8000
+            }
+        ]
+        /*
+        [
+            {
+                id:3,
+                name: "iphone7",
+                quantity: 1
+                price: 8000
+            }
+        ]
+        */
+        let cart = [];
+        function addToCart() {
+            let isflag = false;
+            let prcart;
+            let productName = document.getElementById("product").value;
+            // Kiểm tra sản phẩm có trong cửa hàng không
+            for(let i=0; i < products.length; i++){
+                if(productName === products[i].name) {
+                    console.log("Sản phẩm có trong cửa hàng");
+                    prcart = products[i];
+                    isflag = true;
+                    break;
+                }
+            }
+            if(!isflag){
+                console.log("Sản phẩm không có trong cửa hàng. Nhập sản phẩm khác");
+            } else {
+                // tiến hành đi mua hàng
+                let check = false;
+                for (let i = 0; i < cart.length; i++){
+                    let check = false;
+                    if(productName === cart[i].name){
+                        check = true;
+                        break;
+                    };
+                };
+                if (check) {
+                    // Tăng số lượng
+                    for(let j = 0; j < cart.length; j++){
+                        if (productName === cart[j].name){
+                            cart[j].quantity++;
+                        }
+                    }
+                } else {
+                    // thêm hàng vào trong giỏ
+                    prcart.quantity = 1;
+                    cart.push(prcart);
+                }           
+            }
+            console.log(cart);
+        }
+        /*
+        PHÂN TÍCH BÀI TOÁN
+        1.lấy giá trị ô input người dùng nhập vào
+        2.kiểm tra xem trong cửa hàng có tồn tại sản phẩm để bán hay không
+        3.Nếu có thì thêm vào giỏ hàng gồm các thuộc tính
+          {
+            id="",
+            name: "",
+            quantity:"",
+            price:"",
+          }
+          kiểm tra xem sản phẩm thêm vào có trong giỏ hàng hay chưa nếu có rồi thì tăng số lượng còn
+          không có thì thêm vào bình thường
+        */
+        // let product=["quần", "áo", "rau", "bánh"];
+        // let item = "rau";
+        // let flag = true;
+        // for (let i = 0; i < product.length; i++){
+        //     if(product[i].name === item) {
+        //         flag = true;
+        //         break;
+        //     } else {
+        //         flag = false;
+        //     }
+        //     if(flag) {
+        //         console.log("có rau");
+        //     } else {
+        //         console.log("không rau");
+        //     }
+        // }       
+    </script>
+</body>
+</html>

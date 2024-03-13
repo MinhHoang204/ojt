@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+           font-weight: bold;
+        }
+
+        table {
+           width: 100%;
+           border-collapse: collapse;
+        }
+
+        th, td {
+           border: 1px solid #ddd;
+           padding: 8px;
+           text-align: center;
+        }
+
+        th {
+           background-color: #f2f2f2;
+        }
+
+        button {
+           padding: 5px 10px;
+           margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quản lý Học viên</h1>
+    <form id="studentForm">
+        <label for="fullName">Họ và tên:</label>
+        <input type="text" id="fullName" name="fullName" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required><br><br>
+        <label for="address">Quê quán:</label>
+        <input type="text" id="address" name="address" required><br><br>
+        <label for="gender">Giới tính:</label>
+        <select id="gender" name="gender">
+            <option value="Nam" selected>Nam</option>
+            <option value="Nữ">Nữ</option>
+        </select><br><br>
+        <button type="submit">Lưu</button>
+        <button type="button" id="editBtn" style="display: none;">Cập nhật</button>
+        <button type="button" id="cancelBtn" style="display: none;">Hủy</button>
+    </form>
+    <br>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm...">
+    <button type="button" id="sortBtn">Sắp xếp (theo tên)</button>
+    <br><br>
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Quê quán</th>
+                <th>Giới tính</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="studentList"></tbody>
+    </table>
+    <script>
+        let students = [];
+
+        const form = document.getElementById('studentForm');
+        const tableBody = document.getElementById('studentList');
+        const editBtn = document.getElementById('editBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const sortBtn = document.getElementById('sortBtn');
+        const searchInput = document.getElementById('searchInput');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const gender = document.getElementById('gender').value;
+
+            if (!validateInput(fullName, email, phone, address)) {
+               return;
+            }
+
+            const student = { fullName, email, phone, address, gender };
+
+            if (editBtn.style.display === 'none') {
+               students.push(student);
+            } else {
+               const index = editBtn.dataset.index;
+               students[index] = student;
+               editBtn.style.display = 'none';
+               cancelBtn.style.display = 'none';
+            }
+
+            displayStudents();
+            form.reset();
+        });
+
+        tableBody.addEventListener('click', function(event) {
+            if (event.target.classList.contains('deleteBtn')) {
+                const index = event.target.dataset.index;
+                students.splice(index, 1);
+                displayStudents();
+            } else if (event.target.classList.contains('editBtn')) {
+                const index = event.target.dataset.index;
+                const student = students[index];
+                document.getElementById('fullName').value = student.fullName;
+                document.getElementById('email').value = student.email;
+                document.getElementById('phone').value = student.phone;
+                document.getElementById('address').value = student.address;
+                document.getElementById('gender').value = student.gender;
+
+                editBtn.style.display = 'inline-block';
+                editBtn.dataset.index = index;
+                cancelBtn.style.display = 'inline-block';
+            }
+        });
+
+        sortBtn.addEventListener('click', function() {
+            students.sort((a, b) => a.fullName.localeCompare(b.fullName));
+            displayStudents();
+        });
+
+        searchInput.addEventListener('input', function() {
+            const query = searchInput.value.toLowerCase();
+            const filteredStudents = students.filter(student =>
+            student.fullName.toLowerCase().includes(query)
+        );
+            displayStudents(filteredStudents);
+        });
+
+        function displayStudents(studentList = students) {
+            tableBody.innerHTML = '';
+            studentList.forEach((student, index) => {
+                const row = `<tr>
+                        <td>${student.fullName}</td>
+                        <td>${student.email}</td>
+                        <td>${student.phone}</td>
+                        <td>${student.address}</td>
+                        <td>${student.gender}</td>
+                        <td>
+                            <button class="editBtn" data-index="${index}">Sửa</button>
+                            <button class="deleteBtn" data-index="${index}">Xoá</button>
+                        </td>
+                    </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function validateInput(fullName, email, phone, address) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+    
+            if (fullName.trim() === '') {
+                alert('Vui lòng nhập họ và tên');
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert('Email không hợp lệ');
+                return false;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                alert('Số điện thoại không hợp lệ');
+                return false;
+            }
+
+            if (address.trim() === '') {
+                alert('Vui lòng nhập quê quán');
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+</body>
+</html>

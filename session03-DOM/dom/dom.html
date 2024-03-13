@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dom{
+            color:red;
+        }
+        .tittle{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="dom"  onclick="changeColor()">dom</h1>
+    <h1>hello</h1>
+    <!-- 
+        document.getElementById("dom")
+     -->
+    <!-- đổi nội dung dom thành: học lập trình -->
+    <button onclick="changeColor()">click</button>
+    <img src="" alt="">
+    <p class="heading">Lớp A</p>
+    <p class="heading">Lớp B</p>
+    <!-- 
+        DOM: document object modal
+        mô hình tài liệu dạng đối tượng
+        Q/A: Dom sinh ra khi nào?
+        Khi trang web được tải thì trình duyệt (browser) sẽ tạo ra một mô hình cây DOM
+        Các thành phần trong DOM gồm 3 thành phần
+        1.element
+        Các cách để lấy element
+           I.Lấy theo id
+           ==> TRẢ VỀ ELEMENT CÓ ID ĐÓ
+           II.Lấy theo class
+           ==> TRẢ VỀ HTML COLECTION(gần giống mảng)
+           III.Lấy theo thẻ tag
+           IV.Lấy theo selector
+           -querySelector trả về 1 element đầu tiên duy nhất.
+           -querySelectorAll: trả về 1 modelist
+        2.attribute : thuộc tính
+        -classList: Lấy ra danh sách class của element
+        + cung cấp các phương thức
+            add(): thêm class
+            remove(): xóa class
+            contain(): kiểm tra xem có tồn tại class hay không
+            toggle(): như công tác có class thì xóa đi mà không có class thì thêm vào
+        -setAttribute: thêm thuộc tính
+        3.text(nội dung)
+           1.innerHTML
+           2.textContent
+           3.innerText
+     -->
+     <script>
+        let elemByClass = document.getElementsByClassName("heading");
+        let elemByTagName = document.getElementsByTagName("p");
+        let elemBySelector = document.querySelector(".heading");
+        let elementSelectorAll = document.querySelectorAll(".heading");
+
+        // console.log("elemByClass", elemByClass);
+        // console.log("elemByTagName", elemByTagName);
+        // console.log("elemBySelector", elemBySelector);
+        // console.log("elemBySelectorAll", elementSelectorAll);
+        let count=0;
+        function changeColor() {
+            let elem = document.getElementById("dom");
+            // element.style.color="red";
+            // element.classList.toggle("dom");
+            // element.setAttribute("class", "title");
+            let elementByClass = document.getElementsByClassName("hello")[0].textContent="<h1>hello</h1>";
+            if(elem.innerHTML == "học lập trình"){
+                elem.innerHTML = "dom";
+            } else if (elem.innerHTML == "dom"){
+                elem.innerHTML = "học lập trình";
+            }
+        }
+     </script>
+</body>
+</html>

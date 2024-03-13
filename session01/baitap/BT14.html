@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Viết chương trình nhập vào một số nguyên dương n(n<=100). Hãy in ra bằng số có
+    n dòng, mỗi dòng in n số nguyên liên tiếp, dòng thứ i bắt đầu từ số i-->
+    <script>
+        // Nhập vào số nguyên dương n
+        var n = parseInt(prompt("Nhập vào số nguyên dương n (n <= 100): "));
+
+       // Kiểm tra n có thỏa điều kiện không
+       if (n <= 0 || n > 100) {
+        console.log("Số bạn nhập không hợp lệ.");
+       } else {
+          // In ra bảng n dòng
+          for (var i = 1; i <= n; i++) {
+            var row = [];
+            for (var j = i; j < i + n; j++) {
+                row.push(j);
+            }
+            console.log(row.join(''));
+          }
+       }
+    </script>
+</body>
+</html>

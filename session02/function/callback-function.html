@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        callback-function
+        -là hàm
+        -được truyền làm đối số của hàm khác
+     -->
+     <script>
+        // console.log("111");
+        // setTimeout(() => {
+        //     console.log("55555");
+        // }, 0);
+
+        // console.log("333");
+
+        let sdt;
+        function xinSoDt(a){
+            console.log("Nam gọi cho Trang xin số Quỳnh");
+            setTimeOut(()=>{
+                console.log("Trang mất 3s tìm số");
+                sdt=12345;
+            },3000)
+        }
+        // function khi có số rồi mới gọi
+        function coSoMoiGoi(sdt) {
+            console.log(`Nam gọi cho Quỳnh theo số${bbbb}`);
+        }
+        xinSoDt(coSoMoiGoi);
+     </script>
+</body>
+</html>
